@@ -32,7 +32,9 @@
 
 <center>
 <form id="form_create" runat="server">
-<input type="text" value="" name="name" id="name" autocomplete="off" style="width: 300px"/>
+<asp:ScriptManager ID="ScriptManager1" runat="server" />
+
+<input type="text" id="name" autocomplete="off" style="width: 300px"/>
 <asp:Button id="btn_create" Text="Create Trip" runat="server" onclick="btn_create_Click" />
 </form>
 </center>
@@ -40,22 +42,18 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="scripts" runat="server">
+<script type="text/javascript" src="/scripts/jquery.watermarkinput.js"></script>
 <script type="text/javascript">
-$(document).ready(function () {
-    var bounce = false;
+function pageLoad() {
     var name_def = "Enter a trip name";
     $("#name").Watermark(name_def);
     //Bouncing logo!
     $('img[class="logo_sep"]').mouseenter(function () {
-        if (!bounce) {
-            bounce = true;
-            $(this).animate({ top: ['-=50', 'easeOutQuad'] }, 250);
-            $(this).animate({ top: ['+=50', 'easeInQuad'] }, 250);
-            $(this).animate({ top: ['-=25', 'easeOutQuad'] }, 250);
-            $(this).animate({ top: ['+=25', 'easeInQuad'] }, 250);
-            bounce = false;
-        }
+        $(this).animate({ top: ['-=50', 'easeOutQuad'] }, 250);
+        $(this).animate({ top: ['+=50', 'easeInQuad'] }, 250);
+        $(this).animate({ top: ['-=25', 'easeOutQuad'] }, 250);
+        $(this).animate({ top: ['+=25', 'easeInQuad'] }, 250);
     });
-});
+}
 </script>
 </asp:Content>
