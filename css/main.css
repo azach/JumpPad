@@ -78,7 +78,6 @@
     padding-left: 20px;
     border-top: 1px solid #1e1e1e;
     border-bottom: 1px solid #1e1e1e;
-    text-shadow: 0 1px 0 #444444;
     font-size: 13px;
 	font-family: "Helvetica Neue",Arial !important;
 	letter-spacing: 0;
@@ -208,9 +207,22 @@
     border: 3px solid rgba(82, 82, 82, 0.9);
 }
 
+.overlay_header
+{
+    color: White;
+    text-shadow: 0 1px 0 black;
+    font-size: 22px;
+    font-weight: bold;
+	font-family: "Helvetica Neue",Arial !important;
+	letter-spacing: 0;
+	padding-bottom: 8px;
+	border-bottom: 1px solid #C7D2DC;    
+    margin-bottom: 10px;
+}
+
 .overlay_content
 {
-    margin: 10px 0 5px 0;
+    margin: 15px 0 0 0;
     color: White;
     font-family: "Helvetica Neue",Arial !important;
     font-size: 0.9em;
@@ -329,17 +341,16 @@ input[type="button"]:active, input[type="submit"]:active {
 }
 
 input, textarea {
-	border: solid 1px #BBBBBB;
-	border-radius: 10px;
+	border: solid 2px #85b1de;
+	border-radius: 4px;
 	font: 15px "Helvetica Neue",Arial;
-	opacity: .95;
 	outline: none;
     padding: 8px 12px;    
 }
 
 input:hover, textarea:hover
 {
-    border: solid 1px #85b1de;
+    border: solid 2px #85b1de;
 	background: #E0EDF5;
 }
 
