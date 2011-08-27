@@ -184,7 +184,10 @@ public partial class ViewTrip : System.Web.UI.Page
         ClientScriptManager cs = Page.ClientScript;
 
         // Check to see if the include script exists already.
-        cs.RegisterClientScriptInclude(cstype, "jquery.tools.min.js", ResolveClientUrl("http://cdn.jquerytools.org/1.2.5/jquery.tools.min.js"));
+        if (!cs.IsClientScriptIncludeRegistered(cstype, "jquery.tools.min.js"))
+        {
+            cs.RegisterClientScriptInclude(cstype, "jquery.tools.min.js", ResolveClientUrl("http://cdn.jquerytools.org/1.2.5/jquery.tools.min.js"));
+        }
 
         //Trip header
         this.Title = trip.Name;
@@ -204,10 +207,11 @@ public partial class ViewTrip : System.Web.UI.Page
                 //Pencil icon
                 TripEditIcon.Visible = true;
                 TripEditIcon.Attributes.Add("rel", "#TripAuthFormContainer");
+                TripNewSegment.Visible = authenticated;
                 break;
             case Access.None:
                 TripLockIcon.Attributes.Add("rel", "#TripUnlockFormContainer");
-
+                TripNewSegment.Visible = authenticated;
                 if (!authenticated)
                 {
                     cs.RegisterClientScriptBlock(cstype, "TripAuthLoad", "<script type='text/javascript'>$(document).ready(function() { $('#TripAuthFormContainer').overlay({ load: true, closeOnClick: false, top: '27%' }); });</script>");
