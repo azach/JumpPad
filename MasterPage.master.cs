@@ -15,14 +15,10 @@ public partial class MasterPage : System.Web.UI.MasterPage
         // Get a ClientScriptManager reference from the Page class.
         ClientScriptManager cs = Page.ClientScript;
 
-        // Register scripts used site-wide
+        // Register jQuery -- used site-wide
         if (!cs.IsClientScriptIncludeRegistered(cstype, "jquery.min.js"))
         {
             cs.RegisterClientScriptInclude(cstype, "jquery.min.js", ResolveClientUrl("/scripts/jquery.min.js"));
-        }
-        if (!cs.IsClientScriptIncludeRegistered(cstype, "jquery.watermarkinput.js"))
-        {
-            cs.RegisterClientScriptInclude(cstype, "jquery.watermarkinput.js", ResolveClientUrl("/scripts/jquery.watermarkinput.js"));
         }
     }
 }
