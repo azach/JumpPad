@@ -1,0 +1,359 @@
+/* http://colorschemedesigner.com/#3x21T-------- */
+
+/* Classes
+----------------------------------*/
+.header_nav
+{
+    background-color: #E6F4FF;
+    position: absolute;
+    right: 30px;
+    min-width: 300px;
+    min-height: 50px;
+	-moz-border-radius-bottomleft: 20px;
+	-moz-border-radius-bottomright: 20px;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;    
+}
+
+#footer
+{
+    color: #C7D2DC;
+    background-color: #002B4D;
+    background-image: url(/images/trip_header.png);
+    border-top: 1px solid #1e1e1e;
+    border-bottom: 5px solid white;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    text-shadow: 0 1px 0 #444444;
+    font-size: 13px;
+	font-family: "Helvetica Neue",Arial !important;
+	letter-spacing: 0;
+	padding-top: 12px;
+	-moz-border-radius-bottomleft: inherit;
+	-moz-border-radius-bottomright: inherit;
+	border-bottom-left-radius: inherit;
+	border-bottom-right-radius: inherit;
+	min-height: 32px;
+}
+
+.content
+{
+    position: relative;
+    left: 3%;
+    width: 75%;
+    min-width: 600px;
+}
+
+.content_header
+{
+    color: white;
+    background-color: #002B4D;
+    font-family: "Helvetica Neue",Arial !important;
+    background-image: url(/images/trip_header.png);
+    border-top: 1px solid #1e1e1e;    
+    text-shadow: 0 1px 0 black;
+	letter-spacing: 0;
+	height: 40px;
+	padding-top: 8px;
+	min-height: 32px;
+	-moz-border-radius-topleft: inherit;
+	-moz-border-radius-topright: inherit;
+	border-top-left-radius: inherit;
+	border-top-right-radius: inherit;
+}
+
+.content_body
+{
+    margin-top: 0px;
+    background-color: #E6F4FF; /*fallback*/
+    background-image: -webkit-radial-gradient(#F0F4F8, #F1F5F9);
+    background-image: radial-gradient(#F0F4F8, #F1F5F9);
+}
+
+.content_footer
+{
+    color: #C7D2DC;    
+    background-color: #1e1e1e;
+    padding-left: 20px;
+    border-top: 1px solid #1e1e1e;
+    border-bottom: 1px solid #1e1e1e;
+    text-shadow: 0 1px 0 #444444;
+    font-size: 13px;
+	font-family: "Helvetica Neue",Arial !important;
+	letter-spacing: 0;
+	padding-top: 12px;	
+	-moz-border-radius-bottomleft: inherit;
+	-moz-border-radius-bottomright: inherit;
+	border-bottom-left-radius: inherit;
+	border-bottom-right-radius: inherit;
+	min-height: 32px;
+}
+
+.segment_menu
+{
+    font-size: 28px;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    color: White;
+    min-width: 200px;
+    max-width: 300px;
+    display: table-cell;
+}
+
+.segment_menu_item
+{
+    background-image: url(/images/segment_menu.png);
+    background-repeat: repeat-x;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+    color: inherit;
+    padding-top: 8px;
+    text-shadow: 0 1px 0 black;    
+    padding-right: 10px;
+    height: 42px;
+    min-height: 42px;
+    max-height: 42px;
+    position: relative;
+    text-indent: 20px; 
+}
+
+.segment_menu_hover
+{
+    background-image: url(/images/segment_menu_hover.png);
+    background-repeat: repeat-x;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+    color: inherit;
+    padding-top: 8px;
+    padding-right: 10px;
+    height: 42px;
+    min-height: 42px;
+    max-height: 42px;
+    position: relative;
+    text-indent: 20px;
+}
+
+.segment_menu_active
+{
+    background-image: url(/images/segment_menu_active.png);
+    background-repeat: repeat-x;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+    color: inherit;
+    padding-top: 8px;
+    padding-right: 10px;
+    height: 42px;
+    min-height: 42px;
+    max-height: 42px;
+    position: relative;
+    text-indent: 20px;
+}
+
+.segment_menu_special
+{
+    background-image: url(/images/segment_menu_special.png);
+    background-repeat: repeat-x;
+    cursor: pointer;
+    font-size: 23px;
+    font-family: inherit;
+    color: inherit;
+    padding-top: 10px;
+    padding-right: 10px;
+    height: 40px;
+    min-height: 40px;
+    max-height: 40px;
+    position: relative;
+    text-align: center;
+}
+
+.segment_content
+{
+    border-top: 1px solid #1e1e1e;
+    position: relative;
+    display: table-cell;    
+    width: 100%;
+}
+
+.segment_content_item
+{
+    position: absolute;
+    font-size: 0.9em;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: "Helvetica Neue",Arial !important;
+    display: none;
+}
+
+.error
+{
+    font-size: 14px;
+    color: #BB3322;
+    font-family: "Helvetica Neue",Arial !important;
+}
+
+.overlay_form
+{
+    display: none;
+    z-index: 100;
+    background-color: #333;
+    min-width: 250px;
+    min-height: 100px;
+    padding: 10px 10px 10px 10px;
+    -moz-box-shadow:0 0 90px 5px #000;
+    -webkit-box-shadow: 0 0 90px #000;
+    border: 3px solid rgba(82, 82, 82, 0.9);
+}
+
+.overlay_content
+{
+    margin: 10px 0 5px 0;
+    color: White;
+    font-family: "Helvetica Neue",Arial !important;
+    font-size: 0.9em;
+}
+
+.close {
+	background-image:url(/images/close.png);
+	position:absolute;
+	right:-15px;
+	top:-15px;
+	cursor:pointer;
+	height:35px;
+	width:35px;
+}
+
+a.footer
+{
+    font-size: 13px;
+    color: #C7D2DC;
+    text-decoration: none;
+}
+
+a.footer:hover
+{
+    color: #D8E3ED;
+}
+
+h2, h3, h4, h5, h6 
+{
+    color: White;
+    text-shadow: 0 1px 0 black;
+    line-height: 26px;
+	font-family: "Helvetica Neue",Arial !important;
+	margin: 0;
+	padding: 0;
+	letter-spacing: 0;
+	border-bottom: 0 !important;
+}
+
+span.unlocked 
+{
+    background-image: url(/images/lock-disabled.png);
+    background-repeat: no-repeat;
+    min-height: 32px;
+    min-width: 32px;
+    display: inline-block;
+    cursor: pointer;
+    margin: 0px 0px 0px 5px;
+}
+
+span.locked 
+{    
+    background-image: url(/images/lock-enabled.png);
+    background-repeat: no-repeat;
+    min-height: 32px;
+    min-width: 32px;
+    display: inline-block;
+    cursor: pointer;
+    margin: 0px 0px 0px 5px;
+}
+
+.uneditable 
+{    
+    background-image: url(/images/pencil-disabled.png);
+    background-repeat: no-repeat;
+    min-height: 32px;
+    min-width: 32px;
+    display: inline-block;
+    cursor: pointer;
+    margin: 0px 0px 0px 5px;
+}
+
+.editable
+{
+    background-image: url(/images/pencil-enabled.png);
+    background-repeat: no-repeat;
+    min-height: 32px;
+    min-width: 32px;
+    display: inline-block;
+    cursor: pointer;
+    margin: 0px 0px 0px 5px;
+}
+
+.logo_sep
+{
+    position: relative;
+}
+
+/* Input formatting
+----------------------------------*/
+input[type="button"], input[type="button"]:hover, input[type="submit"], input[type="submit"]:hover {
+    background: #FA2 url(/images/btn-default.png); repeat-x 0 0;
+    background-image: url(/images/btn-default.png);
+    background-repeat-x: repeat;
+    background-repeat-y: no-repeat;
+    background-attachment: initial;
+    background-position-x: 0px;
+    background-position-y: 0px;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: inherit;
+    border: 1px solid #CCCCCC; 
+    text-decoration: none;
+    text-align: center;
+    color: #333;
+    text-shadow: 0 1px 0 #DDDDDD;
+    font: bold 16px Helvetica Neue,Arial,Sans-serif;
+    cursor: pointer;    
+}
+
+input[type="button"]:active, input[type="submit"]:active {
+    background: #FA2 url(/images/btn-default-active.png); repeat-x 0 0;
+    background-image: url(/images/btn-default-active.png);
+    border: 1px solid #FCFFDF;
+    font-weight: bolder;
+}
+
+input, textarea {
+	border: solid 1px #BBBBBB;
+	border-radius: 10px;
+	font: 15px "Helvetica Neue",Arial;
+	opacity: .95;
+	outline: none;
+    padding: 8px 12px;    
+}
+
+input:hover, textarea:hover
+{
+    border: solid 1px #85b1de;
+	background: #E0EDF5;
+}
+
+/* Main Body
+-----------------------------------*/
+body {
+	background-image: url('/images/bg.png');
+	margin: 0;
+	padding: 0;
+}
+
+/* Header
+-----------------------------------*/
+#header
+{
+    min-height: 100px;
+}
