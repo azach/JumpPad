@@ -1,20 +1,58 @@
-/* http://colorschemedesigner.com/#3x21T-------- */
+/*-------- http://colorschemedesigner.com/#3x21T --------*/
 
-/* Classes
+/*----------------------------------
+ Header
 ----------------------------------*/
-.header_nav
+#header
 {
-    background-color: #E6F4FF;
-    position: absolute;
-    right: 30px;
-    min-width: 300px;
-    min-height: 50px;
-	-moz-border-radius-bottomleft: 20px;
-	-moz-border-radius-bottomright: 20px;
-	border-bottom-left-radius: 20px;
-	border-bottom-right-radius: 20px;    
+    min-height: 100px;
 }
 
+div.header_nav
+{
+    background-color: #EEFFB5;
+    position: absolute;
+    right: 30px;
+    min-height: 30px;
+	-moz-border-radius-bottomleft: 14x;
+	-moz-border-radius-bottomright: 14px;
+	border-bottom-left-radius: 14px;
+	border-bottom-right-radius: 14px;
+}
+
+ul.header_nav
+{
+    padding: 0px 0px 0px 0px;
+    margin: 0px 14px 0px 14px;
+    vertical-align: bottom;
+}
+
+li.header_nav
+{
+    float: left;
+    list-style: none;
+    padding: 8px 4px 0px 4px;
+}
+
+.header_nav a
+{
+    float: left;
+    font-size: 15px;
+    font-family: "Helvetica Neue",Arial !important;
+    color: #1d5987;
+    text-decoration: none;
+    padding: 0px 10px 0px 10px;
+    border-bottom: 2px solid #1d5987;
+}
+
+.header_nav a:hover
+{
+    border-bottom: 2px solid #79b7e7;
+}
+
+/*----------------------------------
+ Footer
+----------------------------------*/
 #footer
 {
     color: #C7D2DC;
@@ -35,6 +73,15 @@
 	border-bottom-left-radius: inherit;
 	border-bottom-right-radius: inherit;
 	min-height: 32px;
+}
+
+/*----------------------------------
+ Main body content
+----------------------------------*/
+body {
+	background-image: url('/images/bg.png');
+	margin: 0;
+	padding: 0;
 }
 
 .content
@@ -88,6 +135,10 @@
 	border-bottom-right-radius: inherit;
 	min-height: 32px;
 }
+
+/*----------------------------------
+ Segments
+----------------------------------*/
 
 .segment_menu
 {
@@ -187,12 +238,20 @@
     display: none;
 }
 
+/*----------------------------------
+ Miscellaneous
+----------------------------------*/
+
 .error
 {
     font-size: 14px;
     color: #BB3322;
     font-family: "Helvetica Neue",Arial !important;
 }
+
+/*----------------------------------
+ Overlays
+----------------------------------*/
 
 .overlay_form
 {
@@ -238,6 +297,10 @@
 	width:35px;
 }
 
+/*----------------------------------
+ Site-wide styles
+----------------------------------*/
+
 a.footer
 {
     font-size: 13px;
@@ -261,6 +324,10 @@ h2, h3, h4, h5, h6
 	letter-spacing: 0;
 	border-bottom: 0 !important;
 }
+
+/*----------------------------------
+ Locking/unlocking
+----------------------------------*/
 
 span.unlocked 
 {
@@ -311,7 +378,8 @@ span.locked
     position: relative;
 }
 
-/* Input formatting
+/*----------------------------------
+ Input formatting
 ----------------------------------*/
 input[type="button"], input[type="button"]:hover, input[type="submit"], input[type="submit"]:hover {
     background: #FA2 url(/images/btn-default.png); repeat-x 0 0;
@@ -345,26 +413,16 @@ input, textarea {
 	border-radius: 4px;
 	font: 15px "Helvetica Neue",Arial;
 	outline: none;
-    padding: 8px 12px;    
+    padding: 8px 12px;
+    background-color: #E0EDF6;
 }
 
 input:hover, textarea:hover
 {
-    border: solid 2px #85b1de;
-	background: #E0EDF5;
+    border: solid 2px #F5B800;
 }
 
-/* Main Body
------------------------------------*/
-body {
-	background-image: url('/images/bg.png');
-	margin: 0;
-	padding: 0;
-}
-
-/* Header
------------------------------------*/
-#header
+input:focus, textarea:focus
 {
-    min-height: 100px;
+	background-color: white;
 }

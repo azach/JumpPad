@@ -18,10 +18,14 @@
 <body>
 
 <div id="header">
-<asp:ContentPlaceHolder id="header" runat="server"></asp:ContentPlaceHolder>
+<!--================= Header navigation =================-->
 <div class="header_nav">
-<a href="Default.aspx">Home</a>
+<ul class="header_nav">
+<li class="header_nav"><a href="Default.aspx">Home</a></li>
+<li class="header_nav"><a href="ViewTrip.aspx">View Trip</a></li>
+</ul>
 </div>
+<asp:ContentPlaceHolder id="header" runat="server"></asp:ContentPlaceHolder>
 </div>
 
 <div id="body">
