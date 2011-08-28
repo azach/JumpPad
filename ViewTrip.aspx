@@ -114,7 +114,7 @@ Edit your trip
 Add a new segment
 </div>
 <asp:TextBox runat="server" ID="Segment_Name" Width="300" ValidationGroup="TripNewSegment"></asp:TextBox><br />
-<asp:TextBox runat="server" ID="Segment_Description" TextMode="MultiLine" Rows="3" Width="300"></asp:TextBox><br /><br />
+<asp:TextBox runat="server" ID="Segment_Description" TextMode="MultiLine" Rows="3" Width="300"></asp:TextBox><br />
 <asp:Button runat="server" ID="AddNewSegmentButton" Width="100" Text="Add" OnClientClick="NewSegment()" OnClick="btn_new_segment" ValidationGroup="TripNewSegment" />
 <br /><asp:RequiredFieldValidator runat="server" ControlToValidate="Segment_Name" CssClass="error" SetFocusOnError="true" ErrorMessage="Segment name is required." ValidationGroup="TripNewSegment"></asp:RequiredFieldValidator>
 <br />
@@ -181,6 +181,7 @@ function NewSegment()
 Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
 function EndRequestHandler(sender, args) {
   $('#<%=Segment_Name.ClientID %>').val('');
+  $('#<%=Segment_Description.ClientID %>').val('');
 }
 </script>
 </asp:Content>
