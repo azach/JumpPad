@@ -7,7 +7,7 @@
 <asp:Content ContentPlaceHolderID="content" runat="server">
 
 <center>
-<div style="min-width: 400px; width: 450px; padding-top: 50px;">
+<div style="min-width: 460px; width: 460px; padding-top: 50px;">
 <img id="logo_J" src="images/J.png" class="logo_sep" />
 <img id="logo_u" src="images/u.png" class="logo_sep" />
 <img id="logo_m" src="images/m.png" class="logo_sep" />
@@ -32,9 +32,8 @@
 
 <center>
 <form id="form_create" runat="server">
-<asp:ScriptManager ID="ScriptManager1" runat="server" />
-
-<input type="text" id="name" autocomplete="off" style="width: 300px"/>
+<asp:ScriptManager runat="server" />
+<asp:TextBox ID="Trip_Name" Width="300px" runat="server"></asp:TextBox>
 <asp:Button id="btn_create" Text="Create Trip" runat="server" onclick="btn_create_Click" />
 </form>
 </center>
@@ -46,7 +45,7 @@
 <script type="text/javascript">
 function pageLoad() {
     var name_def = "Enter a trip name";
-    $("#name").Watermark(name_def);
+    $('#<%=Trip_Name.ClientID %>').Watermark(name_def);
     //Bouncing logo!
     $('img[class="logo_sep"]').mouseenter(function () {
         $(this).animate({ top: ['-=50', 'easeOutQuad'] }, 250);
