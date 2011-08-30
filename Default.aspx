@@ -23,9 +23,9 @@
 <ul>
 <h3 style="color: #B9CBD6;">
 <li>Why use us?</li>
-<li>Lorem ipsum dolor sit amet, consectetur adipiscing.</li>
-<li>Proin pulvinar risus sed nulla interdum tincidunt.</li>
-<li>Aliquam ac quam felis.</li>
+<li>What can you do?</li>
+<li>Seven ways to make your trip better</li>
+<li>Get excited!</li>
 </h3>
 </ul>
 </div>
