@@ -30,7 +30,7 @@
 <asp:Repeater ID="Segment_Menu" runat="server">
  <HeaderTemplate></HeaderTemplate>
  <ItemTemplate>  
-   <div class="segment_menu_item" name="<%# Container.ItemIndex %>">
+   <div class="segment_menu_item" name="<%# DataBinder.Eval(Container.DataItem, "Segment_ID") %>">
     <%# DataBinder.Eval(Container.DataItem, "Name") %>
    </div>
  </ItemTemplate>
@@ -45,7 +45,7 @@
 <asp:Repeater ID="Segment_Content" runat="server">
  <HeaderTemplate></HeaderTemplate>
  <ItemTemplate>
-   <div class="segment_content_item" name="<%# Container.ItemIndex %>">
+   <div class="segment_content_item" name="<%# DataBinder.Eval(Container.DataItem, "Segment_ID") %>">
     <i><%# DataBinder.Eval(Container.DataItem, "Description") %></i>
    </div>
  </ItemTemplate>
@@ -56,7 +56,8 @@
 </div>
 
 <div class="content_footer">
-Activity controls here
+<asp:HiddenField ID="Delete_Segment_ID" runat="server" />
+Activity controls here <span class="content_footer_item"><asp:Button ID="Delete_Segment" Text="Delete Segment" runat="server" OnClick="btn_delete_Segment" /></span>
 </div>
 
 </ContentTemplate>
@@ -152,6 +153,7 @@ function pageLoad() {
      }
     });
     $('.segment_menu_item').click(function() {
+     $('#<%=Delete_Segment_ID.ClientID %>').val($(this).attr('name'));
      $('.segment_menu_active').attr("class","segment_menu_item");
      $(this).attr("class", "segment_menu_active");
      $('.segment_content_item:visible').hide();

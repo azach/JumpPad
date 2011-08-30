@@ -121,19 +121,25 @@ body {
 .content_footer
 {
     color: #C7D2DC;    
-    background-color: #1e1e1e;
-    padding-left: 20px;
+    background-color: #1e1e1e;    
     border-top: 1px solid #1e1e1e;
     border-bottom: 1px solid #1e1e1e;
     font-size: 13px;
 	font-family: "Helvetica Neue",Arial !important;
-	letter-spacing: 0;
-	padding-top: 12px;	
+	padding: 4px 0px 4px 0px;
 	-moz-border-radius-bottomleft: inherit;
 	-moz-border-radius-bottomright: inherit;
 	border-bottom-left-radius: inherit;
 	border-bottom-right-radius: inherit;
-	min-height: 32px;
+	min-height: 42px;
+	position: absolute;
+	width: 100%;
+}
+
+.content_footer_item
+{
+    position: absolute;
+    right: 10px;    
 }
 
 /*----------------------------------

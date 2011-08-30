@@ -70,6 +70,21 @@ public partial class ViewTrip : System.Web.UI.Page
         }
     }
 
+    protected void btn_delete_Segment(object sender, EventArgs e)
+    {
+        Trip trip = GetTrip(Request["id"]);
+        if (trip == null) { return; }
+
+        if (String.IsNullOrEmpty(Delete_Segment_ID.Value)) { return; }        
+
+        trip.DeleteSegment(Convert.ToInt32(Delete_Segment_ID.Value));
+
+        Segment_Menu.DataSource = trip.SegmentDataSet;
+        Segment_Menu.DataBind();
+        Segment_Content.DataSource = trip.SegmentDataSet;
+        Segment_Content.DataBind();
+    }
+
     /// <summary>
     /// Click event for Add New Segment button. Inserts a new segment into the trip based on the provided name/description.
     /// </summary>
@@ -82,26 +97,13 @@ public partial class ViewTrip : System.Web.UI.Page
         Trip trip = GetTrip(Request["id"]);
         if (trip == null) { return; }
 
-        string connString = System.Configuration.ConfigurationManager.ConnectionStrings["MySQL"].ConnectionString;
-        MySql.Data.MySqlClient.MySqlConnection connection = new MySql.Data.MySqlClient.MySqlConnection(connString);
-        MySql.Data.MySqlClient.MySqlCommand command_Insert = connection.CreateCommand();        
-        command_Insert.CommandText = "INSERT INTO Segments (Name, Description, Trip_ID) VALUES (@name, @description, @trip_id)";
-        command_Insert.Parameters.Add("name", MySql.Data.MySqlClient.MySqlDbType.String).Value = Segment_Name.Text;
-        command_Insert.Parameters.Add("trip_id", MySql.Data.MySqlClient.MySqlDbType.Int32).Value = trip.ID;
-        command_Insert.Parameters.Add("description", MySql.Data.MySqlClient.MySqlDbType.VarChar).Value = Segment_Description.Text;
-
-        connection.Open();
-        command_Insert.ExecuteNonQuery();
-        //TODO: Parametrize query
-        MySql.Data.MySqlClient.MySqlDataAdapter command_Retrieve = new MySql.Data.MySqlClient.MySqlDataAdapter("SELECT Name, Description FROM Segments WHERE Trip_ID=" + trip.ID, connection);
-        connection.Close();
+        trip.InsertSegment(Segment_Name.Text, Segment_Description.Text);
        
-        System.Data.DataSet ds = new System.Data.DataSet();        
-        command_Retrieve.Fill(ds);
-        Segment_Menu.DataSource = ds;
+        Segment_Menu.DataSource = trip.SegmentDataSet;
         Segment_Menu.DataBind();
-        Segment_Content.DataSource = ds;
-        Segment_Content.DataBind();    
+
+        Segment_Content.DataSource = trip.SegmentDataSet;
+        Segment_Content.DataBind();
     }
 
     /// <summary>
@@ -234,14 +236,10 @@ public partial class ViewTrip : System.Web.UI.Page
         //Load segment information
         if ((trip.Access != Access.None) | (trip.Access == Access.None && authenticated))
         {
-            string connString = System.Configuration.ConfigurationManager.ConnectionStrings["MySQL"].ConnectionString;
-            MySql.Data.MySqlClient.MySqlConnection connection = new MySql.Data.MySqlClient.MySqlConnection(connString);            
-            MySql.Data.MySqlClient.MySqlDataAdapter command = new MySql.Data.MySqlClient.MySqlDataAdapter("SELECT Name, Description FROM Segments WHERE Trip_ID=" + trip.ID, connection);
-            System.Data.DataSet ds = new System.Data.DataSet();
-            command.Fill(ds);
-            Segment_Menu.DataSource = ds;
+            Segment_Menu.DataSource = trip.SegmentDataSet;
             Segment_Menu.DataBind();
-            Segment_Content.DataSource = ds;
+
+            Segment_Content.DataSource = trip.SegmentDataSet;
             Segment_Content.DataBind();
         }
 

@@ -12,14 +12,14 @@ using MySql.Data.MySqlClient;
 [WebService(Namespace = "JumpPad")]
 [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
 [ScriptService] //Allow javascript to access web service
-public class TripService : System.Web.Services.WebService {
+public class TripService : System.Web.Services.WebService {    
 
     public TripService () {
 
         //Uncomment the following line if using designed components 
         //InitializeComponent(); 
     }
-
+    
     [WebMethod]
     public void InsertNewSegment(string name)
     {
