@@ -12,20 +12,36 @@ using MySql.Data.MySqlClient;
 [WebService(Namespace = "JumpPad")]
 [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
 [ScriptService] //Allow javascript to access web service
-public class TripService : System.Web.Services.WebService {    
+public class TripService : System.Web.Services.WebService {
 
-    public TripService () {
-
-        //Uncomment the following line if using designed components 
-        //InitializeComponent(); 
-    }
-    
+    /// <summary>
+    /// Sets the latitude and longitude for a segment
+    /// </summary>
+    /// <param name="segment">Segment ID</param>
+    /// <param name="lat">Latitude</param>
+    /// <param name="lng">Longitude</param>
     [WebMethod]
-    public void InsertNewSegment(string name)
+    public void SetLocation(string segment, string lat, string lng)
     {
-        if (Session["trip"] == null)
+        //TODO: Validation against trip
+
+        string connString = System.Configuration.ConfigurationManager.ConnectionStrings["MySQL"].ConnectionString;
+        MySqlConnection connection = new MySqlConnection(connString);
+        try
         {
-            throw new Exception();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE Segments SET Latitude=@latitude, Longitude=@longitude WHERE Segment_ID=@id";
+            command.Parameters.Add("latitude", MySqlDbType.String).Value = lat;
+            command.Parameters.Add("longitude", MySqlDbType.String).Value = lng;
+            command.Parameters.Add("id", MySqlDbType.Int32).Value = segment;
+
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+        catch
+        {
+            connection.Close();
         }
     }
 

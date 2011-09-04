@@ -1,5 +1,10 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ViewTrip.aspx.cs" MasterPageFile="~/MasterPage.master" Inherits="ViewTrip" %>
 
+<asp:Content ContentPlaceHolderID="head" runat="server">
+<link rel="stylesheet" href="css/leaflet.css" />
+<!--[if lte IE 8]><link rel="stylesheet" href="leaflet/leaflet.ie.css" /><![endif]-->
+</asp:Content>
+
 <asp:Content ContentPlaceHolderID="content" runat="server">
 
 <!-- Begin server form -->
@@ -31,15 +36,21 @@
  <HeaderTemplate></HeaderTemplate>
  <ItemTemplate>  
    <div class="segment_menu_item" name="<%# DataBinder.Eval(Container.DataItem, "Segment_ID") %>">
-    <%# DataBinder.Eval(Container.DataItem, "Name") %>
+       <span title="Name"><%# DataBinder.Eval(Container.DataItem, "Name") %></span>
+       <input style="display: none" name="Latitude" Value='<%# DataBinder.Eval(Container.DataItem, "Latitude") %>' />
+       <input style="display: none" name="Longitude" Value='<%# DataBinder.Eval(Container.DataItem, "Longitude") %>' />
    </div>
  </ItemTemplate>
  <FooterTemplate>
  </FooterTemplate>
 </asp:Repeater>
 <asp:Literal runat="server" ID="TripNewSegment"><span id="TripNewSegmentButton" rel="#TripNewSegmentContainer"><div class="segment_menu_special" id="segment_add_new">Add New Segment</div></span></asp:Literal>
-
+<!-- Segment map -->
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+<div id="map_canvas" style="height: 250px; width: 230px;"></div>
+<input type="text" style="width: 198px; margin-left: 2px"></input>
 </div>
+<!-- End segment map -->
 
 <div class="segment_content">
 <asp:Repeater ID="Segment_Content" runat="server">
@@ -52,7 +63,6 @@
  <FooterTemplate>
  </FooterTemplate>
 </asp:Repeater>
-
 </div>
 
 <div class="content_footer">
@@ -131,12 +141,37 @@ Add a new segment
 
 <asp:Content ContentPlaceHolderID="scripts" runat="server">
 
+<script type="text/javascript" src="/scripts/map.js"></script>
 <script type="text/javascript" src="/scripts/jquery.watermarkinput.js"></script>
 <script type="text/javascript">
 /**
  * Enable visuals on page load
  **/
 function pageLoad() {
+    InitializeMap(function SaveLocation() {
+
+        var id = $('.segment_menu_active').attr('name');
+        var lat = segment_marker.getPosition().lat();
+        var lng = segment_marker.getPosition().lng();
+
+        if (id.length == 0) { return; }
+        
+        if ($('.segment_menu_active') != null) {
+            // Replace the div's content with the values return.
+            var loc_info = "{'segment':" + id + ", 'lat':" + lat + ", 'lng':" + lng + " }";
+            $.ajax({
+              type: "POST",
+              url: "TripService.asmx/SetLocation",
+              data: loc_info,
+              contentType: "application/json; charset=utf-8",
+              dataType: "json",
+              success: function(msg) {
+                $('.segment_menu_active').children('input[name="Latitude"]').val(lat);
+                $('.segment_menu_active').children('input[name="Longitude"]').val(lng);
+              }
+            });
+        }
+    });
     $('#<%=Segment_Name.ClientID %>').Watermark('Enter a segment name');
     $('#<%=Segment_Description.ClientID %>').Watermark('Enter a description');
     //Hide all segment content by default
@@ -152,13 +187,20 @@ function pageLoad() {
        $(this).attr("class","segment_menu_item");
      }
     });
+    //Events to fire when active segment is changed
     $('.segment_menu_item').click(function() {
-     $('#<%=Delete_Segment_ID.ClientID %>').val($(this).attr('name'));
-     $('.segment_menu_active').attr("class","segment_menu_item");
-     $(this).attr("class", "segment_menu_active");
-     $('.segment_content_item:visible').hide();
-     var numSelected=$(this).attr("name");
-     $('.segment_content_item[name="' + numSelected + '"]').show();
+        $('#<%=Delete_Segment_ID.ClientID %>').val($(this).attr('name'));
+        $('.segment_menu_active').attr("class","segment_menu_item");
+        $(this).attr("class", "segment_menu_active");
+        $('.segment_content_item:visible').hide();
+        var numSelected=$(this).attr("name");
+        $('.segment_content_item[name="' + numSelected + '"]').show();
+        //Set map marker
+        segment_marker.setTitle($('.segment_menu_active').children('span[title="Name"]').html().replace(/^\s+|\s+$/g,""));
+        //Update map location
+        var lat = $('.segment_menu_active').children('input[name="Latitude"]').val();
+        var lng = $('.segment_menu_active').children('input[name="Longitude"]').val();
+        SetLocation(lat, lng);
     });
     //Make dialog links clickable
     $('span[rel]').each(function() {    
