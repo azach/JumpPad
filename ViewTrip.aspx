@@ -148,11 +148,15 @@ Add a new segment
  * Enable visuals on page load
  **/
 function pageLoad() {
+    //Watermarks
+    $('#<%=Segment_Name.ClientID %>').Watermark('Enter a segment name');
+    $('#<%=Segment_Description.ClientID %>').Watermark('Enter a description');
+    //Create Google Maps canvas with function necessary to save on changes
     InitializeMap(function SaveLocation() {
 
         var id = $('.segment_menu_active').attr('name');
-        var lat = segment_marker.getPosition().lat();
-        var lng = segment_marker.getPosition().lng();
+        var lat = this.getPosition().lat();
+        var lng = this.getPosition().lng();
 
         if (id.length == 0) { return; }
         
@@ -172,8 +176,18 @@ function pageLoad() {
             });
         }
     });
-    $('#<%=Segment_Name.ClientID %>').Watermark('Enter a segment name');
-    $('#<%=Segment_Description.ClientID %>').Watermark('Enter a description');
+    //Add markers for each location on map
+    $('.segment_menu_item').each(function() {
+        var segment_id=$(this).attr("name");
+        var lat = $(this).children('input[name="Latitude"]').val();
+        var lng = $(this).children('input[name="Longitude"]').val();
+        AddMarker({
+            name: segment_id,
+            latitude: lat,
+            longitude: lng,
+            title: $(this).children('span[title="Name"]').html()
+        });
+    });
     //Hide all segment content by default
     $('.segment_content_item').hide();
     //Special handling for segment mouseovers
@@ -196,11 +210,7 @@ function pageLoad() {
         var numSelected=$(this).attr("name");
         $('.segment_content_item[name="' + numSelected + '"]').show();
         //Set map marker
-        segment_marker.setTitle($('.segment_menu_active').children('span[title="Name"]').html().replace(/^\s+|\s+$/g,""));
-        //Update map location
-        var lat = $('.segment_menu_active').children('input[name="Latitude"]').val();
-        var lng = $('.segment_menu_active').children('input[name="Longitude"]').val();
-        SetLocation(lat, lng);
+        SetActive(numSelected);
     });
     //Make dialog links clickable
     $('span[rel]').each(function() {    
