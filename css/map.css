@@ -1,0 +1,42 @@
+﻿/*----------------------------------
+ Right-click context menu styling for map
+----------------------------------*/
+
+.contextMenu 
+{
+	position: absolute;
+	z-index: 10;
+	display: none;
+	background: #eee;
+	border: 1px solid #777;
+}
+
+.contextMenu ul 
+{
+    padding: 2px 4px 2px 4px;
+    margin: 0 0 0 0;
+	border: solid 1px pink;
+}
+
+.contextMenu li {
+	list-style: none;
+	font-size: 13px;
+	font-family: "Helvetica Neue",Arial !important;
+}
+
+.contextMenu a {
+	display: block;
+	color: #222;
+	text-decoration: none;
+}
+
+.contextMenu li.hover a 
+{
+    color: Black;
+}
+
+.contextMenu li.separator div {
+	margin: 3px 0px;
+	border-top: solid 1px #ccc;
+	border-bottom: solid 1px #fff;
+}

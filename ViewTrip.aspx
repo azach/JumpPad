@@ -1,8 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ViewTrip.aspx.cs" MasterPageFile="~/MasterPage.master" Inherits="ViewTrip" %>
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
-<link rel="stylesheet" href="css/leaflet.css" />
-<!--[if lte IE 8]><link rel="stylesheet" href="leaflet/leaflet.ie.css" /><![endif]-->
+<link rel="stylesheet" type="text/css" href="/css/map.css" />
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="content" runat="server">
@@ -150,15 +149,14 @@ Add a new segment
 function pageLoad() {
     //Watermarks
     $('#<%=Segment_Name.ClientID %>').Watermark('Enter a segment name');
-    $('#<%=Segment_Description.ClientID %>').Watermark('Enter a description');
-    //Create Google Maps canvas with function necessary to save on changes
-    InitializeMap(function SaveLocation() {
-
+    $('#<%=Segment_Description.ClientID %>').Watermark('Enter a description');    
+    //Add save location function
+    var save_func = function() {
         var id = $('.segment_menu_active').attr('name');
+        if (id.length == null) { return; }
+
         var lat = this.getPosition().lat();
         var lng = this.getPosition().lng();
-
-        if (id.length == 0) { return; }
         
         if ($('.segment_menu_active') != null) {
             // Replace the div's content with the values return.
@@ -175,13 +173,17 @@ function pageLoad() {
               }
             });
         }
-    });
+        return false;
+    }
+    //Create Google Maps canvas with function necessary to save on changes
+    InitializeMap({ save: save_func });
     //Add markers for each location on map
     $('.segment_menu_item').each(function() {
         var segment_id=$(this).attr("name");
         var lat = $(this).children('input[name="Latitude"]').val();
         var lng = $(this).children('input[name="Longitude"]').val();
-        AddMarker({
+
+        addMarker({
             name: segment_id,
             latitude: lat,
             longitude: lng,
@@ -201,6 +203,7 @@ function pageLoad() {
        $(this).attr("class","segment_menu_item");
      }
     });
+
     //Events to fire when active segment is changed
     $('.segment_menu_item').click(function() {
         $('#<%=Delete_Segment_ID.ClientID %>').val($(this).attr('name'));
@@ -210,8 +213,9 @@ function pageLoad() {
         var numSelected=$(this).attr("name");
         $('.segment_content_item[name="' + numSelected + '"]').show();
         //Set map marker
-        SetActive(numSelected);
+        markers[numSelected].SetActive();
     });
+    
     //Make dialog links clickable
     $('span[rel]').each(function() {    
      $(this).overlay({
