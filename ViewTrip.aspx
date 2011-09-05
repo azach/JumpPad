@@ -21,7 +21,7 @@
 
 </div>
 
-<asp:ScriptManager runat="server" />
+<asp:ScriptManager runat="server" EnablePartialRendering="true" />
 <asp:UpdatePanel runat="server" ID="Segment">
 <Triggers>
  <asp:AsyncPostBackTrigger ControlID="AddNewSegmentButton" EventName="Click"/>
@@ -45,7 +45,6 @@
 </asp:Repeater>
 <asp:Literal runat="server" ID="TripNewSegment"><span id="TripNewSegmentButton" rel="#TripNewSegmentContainer"><div class="segment_menu_special" id="segment_add_new">Add New Segment</div></span></asp:Literal>
 <!-- Segment map -->
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
 <div id="map_canvas" style="height: 250px; width: 230px;"></div>
 <input type="text" style="width: 198px; margin-left: 2px"></input>
 </div>
@@ -140,13 +139,14 @@ Add a new segment
 
 <asp:Content ContentPlaceHolderID="scripts" runat="server">
 
-<script type="text/javascript" src="/scripts/map.js"></script>
 <script type="text/javascript" src="/scripts/jquery.watermarkinput.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+<script type="text/javascript" src="/scripts/map.js"></script>
 <script type="text/javascript">
 /**
  * Enable visuals on page load
  **/
-function pageLoad() {
+$(document).ready(function() {
     //Watermarks
     $('#<%=Segment_Name.ClientID %>').Watermark('Enter a segment name');
     $('#<%=Segment_Description.ClientID %>').Watermark('Enter a description');    
@@ -173,7 +173,6 @@ function pageLoad() {
               }
             });
         }
-        return false;
     }
     //Create Google Maps canvas with function necessary to save on changes
     InitializeMap({ save: save_func });
@@ -213,7 +212,7 @@ function pageLoad() {
         var numSelected=$(this).attr("name");
         $('.segment_content_item[name="' + numSelected + '"]').show();
         //Set map marker
-        markers[numSelected].SetActive();
+        markers[numSelected].setActive();
     });
     
     //Make dialog links clickable
@@ -223,7 +222,7 @@ function pageLoad() {
         speed: 0,
      });
     });
-}
+});
 /**
  * Close new segment dialog after creating a new segment
  **/

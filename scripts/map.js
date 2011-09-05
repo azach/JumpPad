@@ -8,11 +8,10 @@
 var map;
 var menu;
 var home;
-var segment_marker;
-var markers = new Array();
+var markers = {};  //Hash to store segment markers
 var active;
 var disabled_marker = "/images/map_marker_inactive.png";
-
+var path;
 
 /************************************************
 Map functions
@@ -38,8 +37,9 @@ function InitializeMap(opts) {
 
     if (opts.save != undefined) {
         map.saveLocation = opts.save;
-    }
+    }    
 
+    //Context menu
     menu = new ContextMenu({ map: map });
 
     menu.addItem('Place Marker Here', function (map, latLng) {
@@ -47,6 +47,22 @@ function InitializeMap(opts) {
         active.saveLocation();
         map.panTo(latLng);
     });
+
+    menu.addSep()
+
+    menu.addItem('Expand Map', function (map, latLng) {
+        alert(typeof $(this).parent());
+    });
+
+    //Path
+    var pathOpts = {
+        strokeColor: '#CC0099',
+        strokeOpacity: 1.0,
+        strokeWeight: 3,
+        geodesic: true
+    }
+    path = new google.maps.Polyline(pathOpts);
+    path.setMap(map);
 
     //Set home locations
     GetUserHome();
@@ -86,11 +102,15 @@ function addMarker(options) {
     });
 
     markers[name].setMap(map);
-    markers[name].setLocation(lat, lng); 
+    markers[name].setLocation(lat, lng);
+
+    //Add to path
+    path.getPath().push(markers[name].getPosition());
 
     //Set up default marker events (bounce on drag, stop bouncing to save) 
+    google.maps.event.addListener(markers[name], 'drag', redrawPath);
     google.maps.event.addListener(markers[name], 'dragend', markers[name].StartBounce);
-    google.maps.event.addListener(markers[name], 'click', markers[name].StopBounce);
+    google.maps.event.addListener(markers[name], 'click', markers[name].StopBounce);    
 
     //Set up custom save event
     if (markers[name].saveLocation != null) {
@@ -124,7 +144,7 @@ google.maps.Marker.prototype.setLocation = function (lat, lng) {
 }
 
 //Sets the specified marker as the active one
-google.maps.Marker.prototype.SetActive = function () {
+google.maps.Marker.prototype.setActive = function () {
 
     var old_active = active;
 
@@ -166,6 +186,20 @@ function GetUserHome() {
     }
 }
 
+/**
+ * Redraws the path marker between segment markers
+ * Assumes path and markers array
+**/
+function redrawPath() {
+    //Clear the path
+    while (path.getPath().getLength()) {
+        path.getPath().pop();
+    }
+    //Then redraw
+    for (var markerName in markers) {
+        path.getPath().push(markers[markerName].getPosition());
+    }
+}
 
 /************************************************
 Context menu functions
